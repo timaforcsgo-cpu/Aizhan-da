@@ -167,7 +167,7 @@ function openLetter() {
     ${firstName}, В Настоящее время вы приглашены:<br><br>
     <span class="highlight">На свиданку гулянку 💖</span>
     В день когда тебе удобно &bull; 15:00<br>
-    Dress code: look pretty (which is easy for you)
+    Dress code: Выглядеть красиво (что для тебя легко<3)
   `;
 
   document.getElementById("letterText").innerHTML = html;
