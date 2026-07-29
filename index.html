@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Специальное приглашение💖</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<canvas id="particles"></canvas>
+
+	<!-- SCREEN 1: Boot -->
+	<div class="screen active" id="screen1">
+		<div class="terminal-box">
+			<div class="terminal-bar">
+				<span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+				<span class="terminal-title">invitation.exe</span>
+			</div>
+			<div class="terminal-body">
+				<p class="t-line" id="t1">&gt; Инциализация протокола...</p>
+				<p class="t-line hidden" id="t2">&gt; Сканирование получателя...</p>
+				<p class="t-line hidden" id="t3">&gt; Сигнал получен 💖</p>
+				<p class="t-line hidden" id="t4">&gt; Загрузка площади...</p>
+			</div>
+			<div class="progress-container">
+				<div class="progress" id="progressBar"></div>
+				<span class="progress-pct" id="progressPct">0%</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- SCREEN 2: Identity -->
+	<div class="screen" id="screen2">
+		<div class="card">
+			<div class="badge">Шаг 1 из 3</div>
+			<h1>Проверка личности 💖</h1>
+			<p>Этот сайт быт сделан для особенного человека.<br>Потдверди что ты это она.</p>
+			<input type="text" id="nameInput" placeholder="Enter your name..." autocomplete="off" />
+			<button onclick="verifyName()">Подтверждение →</button>
+			<p class="msg" id="verifyMessage"></p>
+		</div>
+	</div>
+
+	<!-- SCREEN 3: Quiz -->
+	<div class="screen" id="screen3">
+		<div class="card">
+			<div class="badge">Шаг 2 из 3</div>
+			<h1>Пройди тест 😌</h1>
+			<p>Кто из нас красивее и умнее</p>
+			<div class="options-grid">
+				<button class="option-btn" onclick="pickOption(this, 4)">Я канечна</button>
+				<button class="option-btn" onclick="pickOption(this, 4)">Ты (правильный ответ)</button>
+				<button class="option-btn" onclick="pickOption(this, 4)">Мы оба</button>
+				<button class="option-btn" onclick="pickOption(this, 4)">А кого это волнует?</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- SCREEN 4: Results animation -->
+	<div class="screen" id="screen4">
+		<div class="card wide">
+			<h1>Проверка реузльтатов...</h1>
+			<div id="resultsLines"></div>
+			<button id="continueBtn" class="hidden" onclick="nextScreen(5)">Дальше →</button>
+		</div>
+	</div>
+
+	<!-- SCREEN 5: Memory Lane -->
+	<div class="screen" id="screen5">
+		<div class="card">
+			<div class="badge">Шаг 3 из 3</div>
+			<h1>Воспоминания ✨</h1>
+			<div class="memory-stack">
+				<div class="memory-photo photo-back">
+					<img src="./images/memory2.jpg" alt="memory 2" onerror="this.src='';this.closest('.memory-photo').classList.add('photo-missing');this.closest('.memory-photo').innerHTML=''" />
+				</div>
+				<div class="memory-photo photo-front">
+					<img src="./images/memory1.jpg" alt="memory 1" onerror="this.src='';this.closest('.memory-photo').classList.add('photo-missing');this.closest('.memory-photo').innerHTML=''" />
+				</div>
+			</div>
+			<p id="memoryText">Помнишь как мы играли и гуляли </p>
+			<button onclick="nextMemory()">Дальше →</button>
+		</div>
+	</div>
+
+	<!-- SCREEN 6: Fake fail -->
+	<div class="screen" id="screen6">
+		<div class="card">
+			<div class="fail-icon">❌</div>
+			<h1>Оценка не удалась;(.</h1>
+			<p>К сожалению, <span class="name-span" id="failName"></span>, Наш анализ выявил что ты не прошла оценку.</p>
+			<p class="muted">Error code: 404-LOVE-NOT-FOUND<br>Recommendation: See detailed report.</p>
+			<button onclick="plotTwist()">See Detailed Report</button>
+		</div>
+	</div>
+
+	<!-- SCREEN 7: Plot twist -->
+	<div class="screen" id="screen7">
+		<div class="card">
+			<div class="twist-badge">PLOT TWIST</div>
+			<h1>пранк </h1>
+			<p>Ты прошла этот тест на все баллы, <span class="name-span" id="twistName"></span>.</p>
+			<div class="score-row">
+				<div class="score-item"><span class="score-val">100</span><span class="score-label">Вайб</span></div>
+				<div class="score-item"><span class="score-val">∞</span><span class="score-label">Красота</span></div>
+				<div class="score-item"><span class="score-val">5+</span><span class="score-label">В Общем</span></div>
+			</div>
+			<p>Сообщение для тебя.</p>
+			<div class="envelope" onclick="openLetter()" title="Click to open">💌</div>
+			<p class="muted small">Нажми чтобы открыть</p>
+		</div>
+	</div>
+
+	<!-- SCREEN 8: The invitation -->
+	<div class="screen" id="screen8">
+		<div class="card invite-card">
+			<div class="invite-header">
+				<div class="invite-ribbon">Официальное пришлашение</div>
+				<h1>Провести день вместе 💖</h1>
+			</div>
+			<div class="letter-body" id="letterText"></div>
+			<div class="invite-actions">
+				<button class="btn-yes" onclick="acceptDate()">Принять 💕</button>
+				<button class="btn-no" id="noBtn" onmouseover="runAway(event)" ontouchstart="runAway(event)">Нет спасибо;(</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- SCREEN 9: Confirmed -->
+	<div class="screen" id="screen9">
+		<div class="card confirmed-card">
+			<div class="check-circle">✓</div>
+			<h1>Подтвреждено ✅</h1>
+			<p>Ты сказала да!!, <span class="name-span" id="confirmName"></span>. Отказватьсч нельзя.</p>
+			<div class="confirm-details">
+				<div class="detail-row"><span class="detail-icon">🗓️</span><span>По твоему приезду</span></div>
+				<div class="detail-row"><span class="detail-icon">🕖</span><span>Любое время</span></div>
+				<div class="detail-row"><span class="detail-icon">📍</span><span>Алматы</span></div>
+			</div>
+			<p class="big-heart">Очень жду тебя💕</p>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>
